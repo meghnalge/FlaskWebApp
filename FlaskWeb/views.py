@@ -26,8 +26,6 @@ from pulp import *
 import pymysql
 import math
 
-app = Flask(__name__)
-app.secret_key = os.urandom(24)
 localaddress="D:\\home\\site\\wwwroot"
 localpath=localaddress
 os.chdir(localaddress)
