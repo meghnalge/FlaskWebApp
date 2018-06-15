@@ -1,6 +1,4 @@
-"""
-Routes and views for the flask application.
-"""
+
 
 from datetime import datetime
 from flask import render_template
@@ -10,29 +8,17 @@ import pandas as pd
 import pymysql
 import os
 import io
-#from werkzeug.utils import secure_filename
 from pulp import *
 import numpy as np
 import pymysql
 import pymysql.cursors
 from pandas.io import sql
-#from sqlalchemy import create_engine
 import pandas as pd
 import numpy as np
-#import io
-import statsmodels.formula.api as smf
-import statsmodels.api as sm
 import scipy.optimize as optimize
-import matplotlib.mlab as mlab
-import matplotlib.pyplot as plt
-#from flask import Flask, render_template, request, redirect, url_for, session, g
-from sklearn.linear_model import LogisticRegression
 from math import sin, cos, sqrt, atan2, radians
-from statsmodels.tsa.arima_model import ARIMA
 #from sqlalchemy import create_engine
 from collections import defaultdict
-from sklearn import linear_model
-import statsmodels.api as sm
 import scipy.stats as st
 import pandas as pd
 import numpy as np
@@ -42,7 +28,7 @@ import math
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-localaddress="C:\\My_Backup\\SCA_Project3"
+localaddress="D:\\home\\site\\wwwroot"
 localpath=localaddress
 os.chdir(localaddress)
 @app.route('/')
@@ -4740,4 +4726,4 @@ def optimize():
 
 
 if __name__ == "__main__":
-	app.run(host='10.29.48.205',debug=True)
+	app.run()
