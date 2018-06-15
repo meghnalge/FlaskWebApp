@@ -1,0 +1,4 @@
+Techniques,Moving Average,ESPO Smooth,Regression,Time series(ARIMA),Time series(ARIMAX)
+MAPE,0.23,0.31,0.27,0.44,0.29
+Mean Absolute error,177.08,177.08,177.08,177.08,177.08
+Error,2613,7224,9219,4619,8505

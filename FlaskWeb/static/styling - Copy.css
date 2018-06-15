@@ -1,0 +1,163 @@
+.first {
+position: fixed;
+background-image: url('../static/supply-chain-management.jpg');
+width: 100%;
+height: 800px;
+}
+
+.content {
+position: absolute;
+left: 0;
+right: 0;
+z-index: 9999;
+margin-top: 0px;
+margin-left: 0px;
+margin-right: 0px;
+}
+.mainnav {
+margin-top: 0px;
+margin-left: 0px;
+margin-right: 0px;
+opacity:1;
+width:auto;
+}
+.sub-menu-parent { position: relative; }
+
+.sub-menu { 
+  visibility: hidden; /* hides sub-menu */
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background: #21283d;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+.sub-menu1{
+  visibility: hidden; /* hides sub-menu */
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background: #21283d;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+.sub-menu2{
+  visibility: hidden; /* hides sub-menu */
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background: #21283d;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+.sub-menu3{
+  visibility: hidden; /* hides sub-menu */
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background: #21283d;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+.sub-menu11{
+  visibility: hidden; /* hides sub-menu */
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background: #21283d;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+
+.sub-menu-parent:focus .sub-menu,
+.sub-menu-parent:focus-within .sub-menu,
+.sub-menu-parent:hover .sub-menu {
+  visibility: visible; /* shows sub-menu */
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0%);
+  transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+.sub-menu:focus .sub-menu1,
+.sub-menu:focus-within .sub-menu1,
+.sub-menu li:hover .sub-menu1 {
+	visibility: visible; /* shows sub-menu */
+	opacity: 1;
+	z-index: 1;
+	margin-top:-62px;
+	margin-left:180px;
+	width:155px;
+	padding-left:0px;
+	transform: translateY(0%);
+	transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+.sub-menu:focus .sub-menu11,
+.sub-menu:focus-within .sub-menu11,
+.sub-menu li:hover .sub-menu11 {
+	visibility: visible; /* shows sub-menu */
+	opacity: 1;
+	z-index: 1;
+	margin-top:-31px;
+	margin-left:178px;
+	width:175px;
+	padding-left:0px;
+	transform: translateY(0%);
+	transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+.sub-menu1:focus .sub-menu2,
+.sub-menu1:focus-within .sub-menu2,
+.sub-menu1 li:hover .sub-menu2 {
+	visibility: visible; /* shows sub-menu */
+	opacity: 1;
+	z-index: 1;
+	margin-top:-62px;
+	margin-left:155px;
+	width:150px;
+	padding-left:0px;
+	transform: translateY(0%);
+	transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+.sub-menu1:focus .sub-menu3,
+.sub-menu1:focus-within .sub-menu3,
+.sub-menu1 li:hover .sub-menu3 {
+	visibility: visible; /* shows sub-menu */
+	opacity: 1;
+	z-index: 1;
+	margin-top:-32px;
+	margin-left:155px;
+	width:150px;
+	padding-left:0px;
+	transform: translateY(0%);
+	transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+/* presentational */
+body {margin:0;padding:0;font: 13px/1.4 sans-serif; }
+
+nav a { color: white; display: block; padding: 0.5em 1em; text-decoration: none; }
+nav a:hover {background:#4c5f99 }
+nav { list-style-type: none; padding: 0; margin: 0;margin-top:15px;margin-left:3px;margin-right:3px; }
+nav ul { list-style-type: none; padding: 0; margin: 0;}
+nav ul li { list-style-type: none;}
+
+nav > ul { background: #21283d; text-align: right; }
+nav > ul > li > ul {text-align: center; }
+nav > ul > li { display: inline-block; border-left: solid 1px #aaa; }
+nav > ul > li:first-child { border-left: none; }
+
+nav a a {display: block; padding: 0.5em 1em; text-decoration: none; }
