@@ -4722,8 +4722,3 @@ def optimize():
             LaborHours_val=LaborHours_val,MaterialCost_val=MaterialCost_val,InventoryHoldingCost_val=InventoryHoldingCost_val,MarginalCostStockOut_val=MarginalCostStockOut_val,HTCost_val=HTCost_val, 
             LayoffCost_val= LayoffCost_val,RegularTimeCost_val=RegularTimeCost_val,OverTimeCost_val=OverTimeCost_val,CostSubcontracting_val=CostSubcontracting_val)
 
-#Aggregate Planning Close
-
-
-if __name__ == "__main__":
-	app.run()
