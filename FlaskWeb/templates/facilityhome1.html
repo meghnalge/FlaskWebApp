@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Supply Chain Analytics</title>
+		<link rel="icon" href="../static/click.ico">
+		<link rel="stylesheet" href="../static/styling.css" type="text/css">
+		<style>
+		.first {
+			opacity:0.1;
+		}
+		.sebi {
+			width: 15%;
+			float:left;
+			height:100%;
+			color: white;
+			background:#003d72;
+			display:inline-block;
+		}
+		.gmap {
+			float:left;
+			width:85%;
+			background:#96e0a9;
+			display:inline-block;
+		}
+		table {	
+		color: #333;	
+		font-family:"Trebuchet MS", Helvetica, sans-serif; 
+		min-width: 227px;
+		border-collapse: 
+		collapse; border-spacing: 2;
+		}
+		table th
+		{
+			background-color: #8da7e8;
+			color: #333;
+			font-weight: bold;
+			padding: 5px;
+			border-color: #ccc;
+			font-size: 9pt;
+			text-align: center;  
+		}
+		table td
+		{
+			padding: 5px;
+			background-color: white;
+			border-color: #ccc;
+			font-size: 9pt;
+			text-align: center;    
+		}
+		table1, th, td {
+		border: 1px solid black;
+		text-align: center;
+		}
+		.Scroll1
+		{
+		height: auto;
+		overflow-y: scroll;
+		}
+		.Scroll2
+		{
+		margin-top:-15px;
+		height: 360px;
+		overflow-y: scroll;
+		}
+		.Scroll3
+		{
+		width:auto;
+		height: 200px;
+		overflow-y: scroll;
+		}
+		::-webkit-scrollbar {
+		display: none;
+		}
+		#container{
+		float:left;
+		height:240px;
+		width:655px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="first"></div>
+		<div class="content">
+		<div style="height:37px;background:white">
+			<img style = "display:inline;float:left;height:35px;width:150px" src="../static/tcshlogo.png">
+				<div style="margin-right:5px;display:inline-block;float:right;padding: 0.7em 1em;">
+					<strong><p style="color:#21283d;display:inline;width:auto;border-radius: 3px;">User: {{username}}</p>&nbsp;&nbsp;
+					<a style="color:#4c5f99;width:auto;border-radius: 3px;" href="../logout">LOGOUT</a></strong>
+				</div>
+		</div>
+			<nav class="mainnav">
+				<ul>
+					<li style="float:left;font-size:14px" class="sub-menu-parent" tab-index="0">
+						<strong><a href="home" title="Home">Supply Chain Analytics</a></strong>
+					</li>
+
+
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="dist">Distribution Optimization &#9662;</a>
+						<ul class="sub-menu">
+							<li><a href="facilityallocation">Facility Allocation</a></li>
+							<li><a href="#">Logistics & Transportation</a>
+								<ul class="sub-menu11">
+									<li><a href="fleetallocation">Shipment Load Allocation</a></li>
+									<li><a href="#">Route Optimization</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</ul>
+			</nav>
+			</br>
+			<div style="width:100%;margin-top:-16px;">
+				<div class="sebi">
+				<div style="height:150px">
+				<center><div style="margin-top:50px;font-size:30px"><text>Data</text></br><text>Import</div></center>
+				</div>
+					<form action="imprt" method='POST' enctype = "multipart/form-data">
+						<div style="border-radius:3px;border:0.5px solid grey;padding:25px;padding-left:0.8em;">
+							<strong><p style = "font-size:16px;">Data Source</p></strong>
+							Factory Data
+							<input type="file" name="FactoryData" title="Factory Data"  accept=".csv"/>
+							<br></br>
+							Customer Data
+							<input type="file" name="CustomerData" title="Customer Data" accept=".csv"/>
+							<br></br>
+							<center><input type="submit" value="Import"/></center>
+						</div>
+					</form>
+					<div style="height:150px">
+					</br><div style="color:red;height:30px"><center><strong>{{warning}}</strong></center></div>
+					<form action="gmap">
+							<center><input style="margin-top:10px;" type="submit" value="Optimise"/></center>
+					</form>
+					<form action="facility">
+							<center><input style="margin-top:30px;" type="submit" value="Reset"/></center>
+					</form>
+					</div>
+				</div>
+				<div class="gmap">
+					<div id="map" style="height:590px"></div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function initMap() {
+			new google.maps.Map(document.getElementById('map'),{zoom: 4,center: {lat: 39.7392, lng: -104.9903},mapTypeId: 'terrain'});
+			}
+		</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6iDB1k3km4yxP-oNkh_URhN7axPdBXug&callback=initMap"></script>
+	</body>
+</html>

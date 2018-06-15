@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Distribution Network Optimization</title>
+
+         <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="../static/bootstrap.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="../static/style.css">
+    </head>
+    <body>
+
+
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+           
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-default" style="">
+			
+                    <div class="container-fluid" >
+
+                        <div class="navbar-header">
+                            <h2><a href="home">Distribution Network Optimization</a></h2>
+                        </div>
+
+                        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right ">
+								  <li><a href="facilityallocation">Facility Location</a></li>
+                                <li ><a href="fleetallocation">Shipment Load Optimization</a></li>
+								<li ><a href="Inventorymanagment">Fleet Assignment</a></li>
+								<li ><a href="Inventorymanagment">Vehicle Routing</a></li>
+                                <li ><a href="DISTRIBUTION_NETWORK_OPT">Admin</a></li>
+                                <li><button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    REGISTER</button></li>
+                            </ul>
+                        </div>
+						
+                    </div>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Login/Register 
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#Login" data-toggle="tab">Login</a></li>
+                            <li><a href="#Registration" data-toggle="tab">Register</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">
+                                        Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="email1" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="col-sm-2 control-label">
+                                        Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Submit</button>
+                                        <a href="javascript:;">Forgot your password?</a>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">
+                                        Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <select class="form-control">
+                                                    <option>Mr.</option>
+                                                    <option>Ms.</option>
+                                                    <option>Mrs.</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">
+                                        Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile" class="col-sm-2 control-label">
+                                        Mobile</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="mobile" placeholder="Mobile" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">
+                                        Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" placeholder="Password" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="button" class="btn btn-primary btn-sm">
+                                            Save & Continue</button>
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            Cancel</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <h3>
+                                    Sign in with</h3>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="#" class="btn btn-primary" >TCS Email</a> <a href="#" class="btn btn-danger"style="background-color: #d35400;border: none;    padding-left: 0px;">
+                                        Employee ID</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                </nav>
+				
+				
+
+                 
+                <div class="container-custom" style="    width: 99%;position:absolute">
+				
+				<img src="../static/supply-chain-management1.png" style="height:450px;width:101%;"  >
+                    
+				
+				
+                
+				
+				</div>
+                <div class="cover_block" style="background-color:#d35400;position:relative;width:200px;height:200px;margin-top: 283px;
+    margin-left: 115px;text-align:center;font-size:18px;" >
+                       
+<!--
+                        <p style="color:#fff;    margin-top: 157px;margin-left:67px;"><a style="    top: 150px;
+    position: relative;" href="">LOGIN <i class="glyphicon glyphicon-arrow-right" style="padding-left:10px;"></i></a> </p>
+-->
+                    <button class="btn1 btn-primary1" data-toggle="modal" data-target="#myModal">
+    LOGIN<i class="glyphicon glyphicon-arrow-right" style="padding-left:10px;font-size: 16px;"></i></button>
+                    </div>
+                    <div class="cover_text" style="margin-left:110px;">
+                    <h2 style="font-size:44px;font-weight: 400">Intelligent Data Analytics and Visualization  </h2>
+                    <p style="font-size:37px;font-weight: 100">For Business users</p>
+                </div>
+                    <div class="container-custom-body  row" >
+				
+				<div class="container-custom-body2 col-md-4">
+                    <img src="../static/modernize_HR.jpg">
+                    
+				<div class="content-text">
+				
+				<ul class="content-text-body">
+                    <li><h4>Distribution Network Optimization</h4></li>
+				<li><p>Facility Location </p></li>
+				
+				<li><p>Shipment Load Optimization</p></li>
+				
+				<li><p>Fleet Assignment</p></li>
+				
+				<li><p>Vehicle Routing</p></li>
+				
+				<li><p>Admin</p></li>
+                
+				
+				
+				</ul>
+				
+				</div>
+				</div>
+				<div class="container-custom-body2 col-md-4">
+                    <img src="../static/Insurance-analytics-700x300.jpg">
+                    
+				<div class="content-text">
+				
+				<ul class="content-text-body">
+                    <li><h4>Business Insights</h4></li>
+				<li><p>Data driven business insights </p></li>
+				
+				<li><p>Visualization and Reporting</p></li>
+				
+				<li><p>Data Analysis as a Service</p></li>
+				
+				
+				</ul>
+				
+				</div>
+				</div>
+                  <div class="container-custom-body2 col-md-4">
+                      <img src="../static/2016-01-13-Blog-Image-207454807-v1.1.jpg">
+                            
+				<div class="content-text">
+				
+				<ul class="content-text-body">
+                    <li><h4>Data Management</h4></li>
+				<li><p>Cloud Computing </p></li>
+				
+				<li><p>Azure-ML</p></li>
+				
+				<li><p>Big Data Analytics</p></li>
+				
+				
+				</ul>
+				
+				</div>
+				</div>
+				</div>
+                <footer>Copyright © 2015 Tata Consultancy Services</footer>
+                
+
+             </div>
+            
+             
+        </div>
+       
+                
+
+
+
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+         </script>
+    </body>
+</html>

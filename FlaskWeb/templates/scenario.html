@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scenario Selection</title>
+<style type="text/css">        
+			.ScrollStyle
+			{
+					max-height: 500px;
+					overflow-y: scroll;
+			}
+			.new-select {
+					display: inline-block;
+					font-size: 90%;
+			}	
+			p
+			{
+				padding: 5px;
+			}
+			table {	
+			color: #333;	
+			font-family:"Trebuchet MS", Helvetica, sans-serif; 
+			width: auto;
+			border-collapse: 
+			collapse; border-spacing: 2;
+			}
+			table th
+			{
+				background-color: #8da7e8;
+				color: #333;
+				font-weight: bold;
+			}
+			table th, table td
+			{
+				padding: 5px;
+				border-color: #ccc;
+				font-size: 9pt;
+				text-align: center;    
+			}
+			table1, th, td {
+			border: 1px solid black;
+			text-align: center;
+			}
+			label {
+			padding:5px;
+			margin:0 0 10px;
+			display:block; 
+			font-size: 80%;
+			}
+
+			label:hover {
+			background:#eee;
+			cursor:pointer;
+			}		
+			.wrapper {
+			text-align: center;
+			margin-top: 100%;
+			}
+			.wrapper1 {
+			text-align: center;
+			margin-top: 2%;
+			}
+			.inline { 
+			display: inline-block; 
+			margin:1px;
+			}
+			a {
+			text-decoration: none;
+			display: inline-block;
+			padding: 8px 16px;
+
+			}
+
+			a:hover {
+			background-color: #ddd;
+			color: black;
+			}
+
+			.previous {
+			background-color: #018bad;
+			color: black;
+			}
+
+			.next {
+			background-color: #404040;
+			color: white;
+			}
+
+			.round {
+			border-radius: 50%;
+			}
+			.wrapper1 {
+			text-align: center;
+			margin-top: 2%;
+			}
+			.inline { 
+			display: inline-block; 
+			margin:1px;
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				var count = 1;
+				$('#add').click(function(){
+					count = count + 1;
+					var html_code = "<tr id='row"+count+"'>";
+					html_code += "<td><button type='button' name='remove' data-row='row"+count+"' class='btn btn-danger btn-xs remove'>-</button></td>";
+					html_code += "<td><select class='scenario'><option value='2'>Scenario 2</option><option value='3'>Scenario 3</option><option  value='4'>Scenario 4</option><option  value='5'>Scenario 5</option><option value='6'>Scenario 6</option></select></td>";
+					html_code += "<td><select class='customer_priority'><option>Yes</option><option>No</option></select></td>";
+					html_code += "<td><select class='oldest_sw'><option>Yes</option><option>No</option></select></td>";
+					html_code += "<td><select class='production_date'><option>Yes</option><option>No</option></select></td>";
+					html_code += "<td><select class='met_held_group'><option>Yes</option><option>No</option></select></td>";
+					html_code += "<td><select class='test_cut_group'><option>Yes</option><option>No</option></select></td>";
+					html_code += "<td><select class='sub_grouping_rules'><option>SLoc,Route,ShipToAbb,PrimaryEqpt</option><option>SLoc,Route,ShipToAbb</option><option>SLoc,Route</option><option>Route,ShipToAbb,PrimaryEqpt</option><option>Route,ShipToAbb</option><option>ShipToAbb,PrimaryEqpt</option></select></td>";
+					html_code += "<td contenteditable='true' class='load_lower_bounds'></td>";
+					html_code += "<td contenteditable='true' class='load_upper_bounds'></td>";
+					html_code += "<td contenteditable='true' class='width_bounds'></td>";
+					html_code += "<td contenteditable='true' class='length_bounds'></td>";
+					html_code += "<td contenteditable='true' class='description'></td>";
+					html_code += "</tr>";
+					$('#crud_table').append(html_code);
+				});
+
+				$(document).on('click', '.remove', function(){
+					var delete_row = $(this).data("row");
+					$('#' + delete_row).remove();
+				});
+
+				$('#save').click(function(){
+					var scenario = [];
+					var customer_priority = [];
+					var oldest_sw = [];
+					var production_date = [];
+					var met_held_group = [];
+					var test_cut_group = [];
+					var sub_grouping_rules = [];
+					var load_lower_bounds = [];
+					var load_upper_bounds = [];
+					var width_bounds = [];
+					var length_bounds = [];
+					var description =[];
+					$('.scenario option:selected').each(function(){
+						scenario.push($(this).val());
+					});
+					$('.customer_priority option:selected').each(function(){
+						customer_priority.push($(this).val());
+					});
+					$('.oldest_sw option:selected').each(function(){
+						oldest_sw.push($(this).val());
+					});
+					$('.production_date option:selected').each(function(){
+						production_date.push($(this).val());
+					});
+					$('.met_held_group option:selected').each(function(){
+						met_held_group.push($(this).val());
+					});
+					$('.test_cut_group option:selected').each(function(){
+						test_cut_group.push($(this).val());
+					});
+					$('.sub_grouping_rules option:selected').each(function(){
+						sub_grouping_rules.push($(this).val());
+					});
+					$('.load_lower_bounds').each(function(){
+						load_lower_bounds.push($(this).text());
+					});
+					$('.load_upper_bounds').each(function(){
+						load_upper_bounds.push($(this).text());
+					});
+					$('.width_bounds').each(function(){
+						width_bounds.push($(this).text());
+					});
+					$('.length_bounds').each(function(){
+						length_bounds.push($(this).text());
+					});
+					$('.description').each(function(){
+						description.push($(this).text());
+					});
+					$.ajax({
+						url:"scenario_insert",
+						method:"POST",
+						data:{scenario:scenario, customer_priority:customer_priority, oldest_sw:oldest_sw, production_date:production_date, met_held_group:met_held_group, test_cut_group:test_cut_group, sub_grouping_rules:sub_grouping_rules, load_lower_bounds:load_lower_bounds, load_upper_bounds:load_upper_bounds, width_bounds:width_bounds, length_bounds:length_bounds, description:description},
+						success:function(data){
+						alert(data);
+						$("td[contentEditable='true']").text("");
+						for(var i=2; i<= count; i++)
+						{
+						$('tr#'+i+'').remove();
+						}
+						}
+					});
+				});
+			});
+		</script>
+		<script>
+		function myFunction() {
+			var x = document.getElementById("myDIV");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+		}
+		</script>
+</head>
+<body>
+</br>
+<center><strong><p style="color:red">
+All fields are monadatory!!
+</p></strong></center>
+<div id="divActivites" name="divActivites">
+	<center><strong><p style = "font-size:15px">Scenario Management:<p></strong></center>
+	<div class="ScrollStyle">
+		<div class="container">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="crud_table">
+					<tr>
+						<th width="5%">Default</th>
+						<th width="10%">Scenario</th>
+						<th width="5%">Customer Priority</th>
+						<th width="5%">Oldest Sw</th>
+						<th width="5%">Production Date</th>
+						<th width="5%">Met Held Group</th>
+						<th width="5%">Test Cut Group</th>
+						<th width="20%">Sub Grouping Rules</th>
+						<th width="5%">Load Lower Bounds (lb)</th>
+						<th width="5%">Load Upper Bounds (lb)</th>
+						<th width="5%">Width Bounds(inches)</th>
+						<th width="5%">Length Bounds(inches)</th>
+						<th width="20%">Description</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td><select class="scenario"><option value="1">Scenario 1</option></select></td>
+						<td><select class="customer_priority"><option>Yes</option><option>No</option></select></td>
+						<td><select class="oldest_sw"><option>Yes</option><option>No</option></select></td>
+						<td><select class="production_date"><option>Yes</option><option>No</option></select></td>
+						<td><select class="met_held_group"><option>Yes</option><option>No</option></select></td>
+						<td><select class="test_cut_group"><option>Yes</option><option>No</option></select></td>
+						<td><select class="sub_grouping_rules"><option>SLoc,Route,ShipToAbb,PrimaryEqpt</option></select></td>
+						<td contenteditable="true" class="load_lower_bounds">175000</td>
+						<td contenteditable="true" class="load_upper_bounds">205000</td>
+						<td contenteditable="true" class="width_bounds">370</td>
+						<td contenteditable="true" class="length_bounds">500</td>
+						<td contenteditable="true" class="description">Scenario1 is Awesome</td>
+					</tr>
+				</table>
+				<div align="left">
+				<button type="button" name="add" id="add" class="btn btn-success btn-xs">+</button>
+				</div>
+				<div align="center">
+					<form action = "fetch" method="POST" enctype="multipart/form-data">
+						<button type="button" name="save" id="save" class="btn btn-info" onclick="this.form.submit()">Save</button>
+					</form>
+				</div>
+				<br />
+				<div style = "font-size:13px;color:red"><center>{{alert1}}</center></div>
+			</div>
+		</div>
+		<div class="container">
+		<div class="table-responsive">
+		{{sdata|safe}}
+		</div>
+		</div>
+	</div>
+</div>
+</br>
+</br>
+</br>
+<div align="center">
+<div class=	"inline	">
+<form action = "fetch" method="POST" enctype="multipart/form-data">
+<button type="button" name="save" id="save" class="btn btn-info" onclick="this.form.submit()">View</button>
+</form>
+</div>
+<div class=	"inline	">
+<form action = "delete" method="POST" enctype="multipart/form-data">
+<input type="submit" value="Delete all Scenarios"/>
+</form>
+</div>
+<button type="button" class="btn btn-info" onclick="self.close()">Back</button>
+</div>
+</body>
+</html>

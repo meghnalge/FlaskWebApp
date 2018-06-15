@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Distribution Network Optimization</title>
+
+         <!-- Bootstrap CSS CDN -->
+		 <link rel="stylesheet" href="../static/bootstrap.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="../static/style.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		
+    </head>
+	<style>
+	.btn2{
+	 background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+	border-radius:10px;
+	}
+	.btn3{
+	 background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 4px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+	border-radius:10px;
+	}
+	.custom_line{
+	display: inline-flex;
+	}
+	.custom_line li{
+	padding-left:10px;
+	}
+	.custom_line li p{
+	font-weight:600;
+	}
+	</style>
+    <body>
+
+
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+           <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><a href="home">Distribution Network Optimization</a></h3>
+                    <strong>DNO</strong>
+                </div>
+
+                <ul class="list-unstyled components">
+                     <li class="active">
+                        <a href="facilityimport">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            Data Import
+                        </a>
+                    </li>
+					
+                    
+                   <li class="">
+                        <a href="#homeSubmenu" >
+                            <i class="glyphicon glyphicon-dashboard"></i>
+                            Shipment Load Optimization
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="facilityallocation">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            Scenario Management
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-default">
+				
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                
+							   <li ><a href="facilitylocation">Facility Location</a></li>
+                                <li class="active"><a href="Inventorymanagment">Shipment Load Optimization</a></li>
+                                <li ><a href="DISTRIBUTION_NETWORK_OPT">Admin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="container-background">
+				<h2>Data Import </h2>
+                <div class="line"></div>
+                </div>
+			<!-- 	<div class="container-custom-body  row">
+				<div class="content-text">
+				<ul class="custom_line" style="">
+				<li><input type="radio"></li>
+				<li><p>Factory Data </p></li>
+				<li><input type="radio"></li>
+				<li><p>Customer Data</p></li>
+				
+				
+				</ul>
+				</div>
+				</div> -->
+                <div class="container-custom-body  row">
+				<div class="content-text">
+				<ul class="custom_line" style="">
+				
+				<li><input type="radio"></li>
+				<li><p>Database </p></li>
+				<li><input type="radio"></li>
+				<li><p>File</p></li>
+				
+				<li><submit class="btn3"><a href="">Import</a></submit></li>
+				</ul>
+				</div>
+				</div>
+				
+				<div class="container-custom-body  row" style="margin-top:40px">
+				<div class="content-text">
+				<table id="example1" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+                <th>Extn.</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tiger</td>
+                <td>Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+                <td>5421</td>
+                <td>t.nixon@datatables.net</td>
+            </tr>
+			<tr>
+                <td>Donna</td>
+                <td>Snider</td>
+                <td>Customer Support</td>
+                <td>New York</td>
+                <td>27</td>
+                <td>2011/01/25</td>
+                <td>$112,000</td>
+                <td>4226</td>
+                <td>d.snider@datatables.net</td>
+            </tr>
+        </tbody>
+    </table>
+				</div>
+				
+			
+				</div>
+				
+		
+                </nav>
+		
+
+           </div>
+        </div>
+
+
+
+
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+         </script>
+		 
+		 
+		 <!-- Table -->
+		 
+
+		 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
+	 <script>
+		 $(document).ready(function() {
+    $('#example1').DataTable( {
+        "scrollY": 200,
+        "scrollX": true
+    } );
+} );
+	 </script>
+    </body>
+</html>

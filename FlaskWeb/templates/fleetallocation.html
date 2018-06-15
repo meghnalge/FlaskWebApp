@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+<title>Shipment Load Allocation</title>
+<link rel="icon" href="../static/click.ico">
+<link rel="stylesheet" href="../static/styling.css" type="text/css">
+<style type="text/css">        
+	.ScrollStyle
+	{
+		max-height: 200px;
+		overflow-y: scroll;
+	}
+	.ScrollStyle1
+	{
+	height: 80px;
+	overflow-y: scroll;
+	background:transparent;
+	}
+	.new-select {
+			display: inline-block;
+			font-size: 90%;
+	}	
+	p
+	{
+		padding: 5px;
+	}
+	table {	
+	color: #333;	
+	font-family:"Trebuchet MS", Helvetica, sans-serif; 
+	width: auto;
+	border-collapse: 
+	collapse; border-spacing: 2;
+	}
+	table th
+	{
+		background-color: #8da7e8;
+		color: #333;
+		font-weight: bold;
+		padding: 5px;
+		border-color: #ccc;
+		font-size: 9pt;
+		text-align: center;  
+	}
+	table td
+	{
+		padding: 5px;
+		background-color: white;
+		border-color: #ccc;
+		font-size: 9pt;
+		text-align: center;    
+	}
+	table1, th, td {
+	border: 1px solid black;
+	text-align: center;
+	}
+	label {
+	padding:5px;
+	margin:0 0 10px;
+	display:block; 
+	font-size: 80%;
+	}
+
+	label:hover {
+	background:#eee;
+	cursor:pointer;
+	}		
+	.wrapper {
+	text-align: center;
+	margin-top: 100%;
+	}
+	.wrapper1 {
+	text-align: center;
+	margin-top: 2%;
+	position: fixed;
+	bottom: 20px;
+	width: 80%;
+	}
+	.inline { 
+	display: inline-block; 
+	margin:1px;
+	}
+	.previous {
+	background-color: #018bad;
+	color: black;
+	}
+	.next {
+	background-color: #404040;
+	color: white;
+	}
+	.round {
+	border-radius: 50%;
+	}
+</style>
+<style type="text/css">
+	select {
+	  margin: 20px;
+	  border: 1px solid #111;
+	  <!-- background: transparent; -->
+	  width: 150px;
+	  padding: 5px 5px 5px 5px;
+	  font-size: 12px;
+	  border: 1px solid #ccc;
+	  height: 24px;
+	  -webkit-appearance: none;
+	  -moz-appearance: none;
+	  appearance: none;
+	  background: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png) 96% / 15% no-repeat #eee;
+	}
+	select::-ms-expand { 
+		display: none; /* remove default arrow in IE 10 and 11 */
+	}
+	@media screen and (min-width:0\0) {
+		select {
+			background:none\9;
+			padding: 5px\9;
+		}
+	}
+</style>
+
+<style>
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+.neva {
+    float: right;
+    width: 25%;
+    margin: 0;
+    padding: 1em;
+	color: white;
+}
+.neva ul {
+	background:transparent;
+    list-style-type: none;
+    padding: 0;
+	color: #21283d;
+}
+article {
+    margin-right: 250px;
+    padding: 1em;
+}
+</style>
+<style>
+ .first {
+    opacity: 0.1;
+}
+.button {
+    background-color: #21283d;
+    border: none;
+    color: white;
+    padding: 10px 12px;
+	padding: 0px;
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 1px;
+    cursor: pointer;
+	width: 135px;  
+    height: 30px;
+	font-weight: bold;
+}
+.button1 {border-radius: 4px; width: 100px;  height: 30px;}
+.button2 {border-radius: 4px; width: 160px;  height: 30px;}
+.button3 {border-radius: 4px; width: 130px;  height: 30px;}
+.button4 {border-radius: 4px; width: 70px;  height: 30px;}
+</style>
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+		<div class="first"></div>
+		<div class="content">
+		<div style="height:37px;background:white">
+			<img style = "display:inline;float:left;height:35px;width:150px" src="../static/tcshlogo.png">
+				<div style="margin-right:5px;display:inline-block;float:right;padding: 0.7em 1em;">
+					<strong><p style="color:#21283d;display:inline;width:auto;border-radius: 3px;">User: {{username}}</p>&nbsp;&nbsp;
+					<a style="color:#4c5f99;width:auto;border-radius: 3px;" href="../logout">LOGOUT</a></strong>
+				</div>
+		</div>
+			<nav class="mainnav">
+				<ul>
+					<li style="float:left;font-size:14px" class="sub-menu-parent" tab-index="0">
+						<strong><a href="home" title="Home">Supply Chain Analytics</a></strong>
+					</li>
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="dmd">Demand Planning</a>
+						<ul class="sub-menu">
+							<li><a href="demandforecast">Demand Forecast</a>
+							</li>
+						</ul>
+					</li>
+					<li style="width:180px" class="sub-menu-parent" tab-index="0">
+						<a href="invt">Inventory Management &#9662;</a>
+						<ul class="sub-menu">
+							<li><a href="outputx">Inventory Classification</a>
+							</li>
+							<li><a href="#">Inventory Control Models</a>
+								<ul class="sub-menu1">
+									<li><a href="#">Deterministic Demand</a>
+										<ul class="sub-menu2">
+											<li><a href="eoq">EOQ Model</a></li>
+											<li><a href="eoq_backorders">EOQ with Backorder </a></li>
+											<li><a href="eproduction">EPQ model</a></li>
+											<li><a href="ppbreak">Price-Break model</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Probabilistic Demand</a>
+										<ul class="sub-menu3">
+											<li><a href="spt">Single-period model</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<!-- <li><a href="#">MRP</a></li> -->
+						</ul>
+					</li>
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="dist">Distribution Optimization &#9662;</a>
+						<ul class="sub-menu">
+							<li><a href="facilityallocation">Facility Allocation</a></li>
+							<li><a href="#">Logistics & Transportation</a>
+								<ul class="sub-menu11">
+									<li><a href="fleetallocation">Shipment Load Allocation</a></li>
+									<li><a href="#">Route Optimization</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="procurementplanning">Procurement Planning</a>
+						<ul class="sub-menu">
+							<li><a href="vendorselection">Vendor Selection</a></li>
+							<li><a href="vendormanagement">Vendor Management</a></li>
+							<li><a href="vendorperformanceanalysis">Vendor Performance Analysis</a></li>
+							<li><a href="purchaseorderallocation">Purchase Order Allocation</a></li>
+							<li><a href="purchaseordermanagement">Purchase Order Management</a></li>
+						</ul>
+					</li>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</ul>
+			</nav>
+	<div id="wrapper">
+	<script>
+		function newWindow()
+		{
+		var win = window.open('scenario', 'Open Multiple Popup Windows', 'width=1300,height=650,top=0,left=0,resizable=1,menubar=yes', true); win.focus();
+		}
+		function showDiv() {
+			document.getElementById('div1').style.display = "block";
+		}
+	</script>
+	<div class="neva">
+		{% if sa==1 %}
+		<ul>
+			<div style="border: solid black 2px;background-color:white;width:335px;height:450px;">
+				<center><strong><p style = "display:inline;font-size:18px;color: black;">Summary</p></strong></center>
+				<pre class="ScrollStyle1" style="font-size:13px;color: black;width:335px;height:410px;">{{content|safe}}</pre>
+			</div>
+		</ul>
+		{% else %}
+		</br></br></br></br></br></br></br></br></br></br></br></br>
+		<center><div class="loader" id="div1" style="display:none;"></div></center>
+		{% endif %}
+	</div>
+	<article>
+		<div>
+			<center><h1 class="entry-title" title="Shipment Load Alocation"><font size="5" face="Calibri" color="#21283d">Shipment Load Allocation</font></h1></center>
+		</div>
+		<div style = "font-size:13px;color:red"><center>{{alert}}</center></div>
+		<form action = "/dalink" method="POST" enctype="multipart/form-data">
+			<center>
+				<div>
+					<strong><p style="display:inline;font-size:13px;color: #21283d;">Equipment Type:</p></strong>
+					<select size="1" id="Rank" title="" name="type">
+						<option value="select">Default</option>
+						<option value="Vessel-Med">Vessel-Med</option>
+					</select>
+					<strong><p style = "display:inline;font-size:13px;color: #21283d;">Production Date:</p></strong>
+					<label style="display:inline">From:</label><input style="width:128px;border: 1px solid #ccc;" type="date" name ="from"/>
+					<label style="display:inline">To:</label><input style="width:128px;border: 1px solid #ccc;" type="date" name ="to"/>
+				</div>
+			</center>
+			<div>
+				<strong><center><input type="submit" id="upload" class="button button1" value="Data Import" enctype="multipart/form-data"/></center></strong></br>
+				<div><center><div style = "display:inline;font-size:15px">{{frm}}</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div style = "display:inline;font-size:15px">{{to}}</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div style = "display:inline;font-size:15px">{{typ}}</div></br>
+				<div style = "display:block;padding: 1em;"class="ScrollStyle">{{data|safe}}</div></center></div>
+			</div>
+		</form>
+	</div>
+	</br></br>
+	<center>
+	<div>
+	{% if say==1 %}
+		<div style = "font-size:20px;color:green">Optimization Successful!!</div>
+	{% endif %}
+	{% if say==0 %}
+		<div style = "font-size:20px;color:red">Optimization Failed!!</div>
+	{% endif %}
+	  </div>
+	</center>
+	<div class="wrapper1">
+		<div class=	"inline	">
+			<center><input type="button" class="button button2" value="Scenario Management" onclick="newWindow()" class="bt" /></center>
+		</div>
+		<div class=	"inline	">
+			<form action='/optimise'>
+				<input type="submit" id="opti" class="button button4" value="Optimise" onclick="showDiv()"/>
+			</form>
+		</div>
+		<div class=	"inline	">
+			<form action="/papadashboard" target="_blank">
+				<input type="submit" class="button button3" value="Dashboard"/>
+			</form>
+		</div>
+		<div class=	"inline	">
+			<form action="/reset">
+				<input type="submit" class="button button3" value="Reset"/>
+			</form>
+		</div>
+	</div>
+</article>
+</div>
+</body>
+</html> 

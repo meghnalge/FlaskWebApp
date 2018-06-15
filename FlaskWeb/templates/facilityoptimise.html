@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Supply Chain Analytics</title>
+		<link rel="icon" href="../static/click.ico">
+		<link rel="stylesheet" href="../static/styling.css" type="text/css">
+		<style>
+		.first {
+			opacity:0.1;
+		}
+		.sebi {
+			width: 15%;
+			float:left;
+			height:100%;
+			color: white;
+			background:#003d72;
+			display:inline-block;
+		}
+		.tables {
+			float:left;
+			width: 17%;
+			display:inline-block;
+			height:100%;
+			background-color: #969ee0;
+		}
+		.gmap {
+			float:left;
+			width: 67.5%;
+			background:#96e0a9;
+			display:inline-block;
+		}
+		table {	
+		color: #333;	
+		font-family:"Trebuchet MS", Helvetica, sans-serif; 
+		min-width: 227px;
+		border-collapse: 
+		collapse; border-spacing: 2;
+		}
+		table th
+		{
+			background-color: #8da7e8;
+			color: #333;
+			font-weight: bold;
+			padding: 5px;
+			border-color: #ccc;
+			font-size: 9pt;
+			text-align: center;  
+		}
+		table td
+		{
+			padding: 5px;
+			background-color: white;
+			border-color: #ccc;
+			font-size: 9pt;
+			text-align: center;    
+		}
+		table1, th, td {
+		border: 1px solid black;
+		text-align: center;
+		}
+		.Scroll1
+		{
+		height: auto;
+		overflow-y: scroll;
+		}
+		.Scroll2
+		{
+		margin-top:-15px;
+		height: 360px;
+		overflow-y: scroll;
+		}
+		.Scroll3
+		{
+		width:auto;
+		height: 200px;
+		overflow-y: scroll;
+		}
+		::-webkit-scrollbar {
+		display: none;
+		}
+		#container{
+		float:left;
+		height:240px;
+		width:655px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="first"></div>
+		<div class="content">
+		<div style="height:37px;background:white">
+			<img style = "display:inline;float:left;height:35px;width:150px" src="../static/tcshlogo.png">
+				<div style="margin-right:5px;display:inline-block;float:right;padding: 0.7em 1em;">
+					<strong><p style="color:#21283d;display:inline;width:auto;border-radius: 3px;">User: {{username}}</p>&nbsp;&nbsp;
+					<a style="color:#4c5f99;width:auto;border-radius: 3px;" href="../logout">LOGOUT</a></strong>
+				</div>
+		</div>
+			<nav class="mainnav">
+				<ul>
+					<li style="float:left;font-size:14px" class="sub-menu-parent" tab-index="0">
+						<strong><a href="home" title="Home">Supply Chain Analytics</a></strong>
+					</li>
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="dmd">Demand Planning</a>
+						<ul class="sub-menu">
+							<li><a href="demandforecast">Demand Forecast</a>
+							</li>
+						</ul>
+					</li>
+					<li style="width:180px" class="sub-menu-parent" tab-index="0">
+						<a href="invt">Inventory Management &#9662;</a>
+						<ul class="sub-menu">
+							<li><a href="outputx">Inventory Classification</a>
+							</li>
+							<li><a href="#">Inventory Control Models</a>
+								<ul class="sub-menu1">
+									<li><a href="#">Deterministic Demand</a>
+										<ul class="sub-menu2">
+											<li><a href="eoq">EOQ Model</a></li>
+											<li><a href="eoq_backorders">EOQ with Backorder </a></li>
+											<li><a href="eproduction">EPQ model</a></li>
+											<li><a href="ppbreak">Price-Break model</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Probabilistic Demand</a>
+										<ul class="sub-menu3">
+											<li><a href="spt">Single-period model</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<!-- <li><a href="#">MRP</a></li> -->
+						</ul>
+					</li>
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="dist">Distribution Optimization &#9662;</a>
+						<ul class="sub-menu">
+							<li><a href="facilityallocation">Facility Allocation</a></li>
+							<li><a href="#">Logistics & Transportation</a>
+								<ul class="sub-menu11">
+									<li><a href="fleetallocation">Shipment Load Allocation</a></li>
+									<li><a href="#">Route Optimization</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="sub-menu-parent" tab-index="0">
+						<a href="procurementplanning">Procurement Planning</a>
+						<ul class="sub-menu">
+							<li><a href="vendorselection">Vendor Selection</a></li>
+							<li><a href="vendormanagement">Vendor Management</a></li>
+							<li><a href="vendorperformanceanalysis">Vendor Performance Analysis</a></li>
+							<li><a href="purchaseorderallocation">Purchase Order Allocation</a></li>
+							<li><a href="purchaseordermanagement">Purchase Order Management</a></li>
+						</ul>
+					</li>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</ul>
+			</nav>
+			</br>
+			<div style="width:100%;margin-top:-16px;">
+				<div class="sebi">
+				<div style="height:150px">
+				<center><div style="margin-top:50px;font-size:30px"><text>Facility</text></br><text>Location</text></br><text>Model</text></div></center>
+				</div>
+					<form action="imprt" method='POST' enctype = "multipart/form-data">
+						<div style="border-radius:3px;border:0.5px solid grey;padding:25px;padding-left:0.8em;">
+							<strong><p style = "font-size:16px;">Data Source</p></strong>
+							Factory Data
+							<input type="file" name="FactoryData" title="Factory Data"  accept=".csv"/>
+							<br></br>
+							Customer Data
+							<input type="file" name="CustomerData" title="Customer Data" accept=".csv"/>
+							<br></br>
+							<center><input type="submit" value="Import"/></center>
+						</div>
+					</form>
+					<div style="height:150px">
+					<form action="gmap">
+							<center><input style="margin-top:50px;" type="submit" value="Optimise"/></center>
+					</form>
+					<form action="facility">
+							<center><input style="margin-top:50px;" type="submit" value="Reset"/></center>
+					</form>
+					</div>
+				</div>
+				<div class="tables">
+				<center>
+					<div class="Scroll1">{{factory|safe}}</div>
+					</br>
+					<div class="Scroll2">{{customer|safe}}</div>
+				</center>
+				</div>
+				<div class="gmap">
+					<div id="map" style="height:350px; width:100%"></div></br>
+					<div style="float:top;margin-top:-16.5px">
+						<div id="container"></div>
+						<div style="height:240px;float:right;margin-right:2px" class="Scroll3">{{summary|safe}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function initMap() {
+				var polyline;
+				var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+				{% for item in loc1 %}
+				var {{item[0]}} = new google.maps.LatLng({{item[1]}},{{item[2]}});{% endfor %}
+				{% for item in loc2 %}
+				var {{item[0]}} = new google.maps.LatLng({{item[1]}},{{item[2]}});{% endfor %}
+
+				function init() {
+					var map = new google.maps.Map(document.getElementById("map"), {center: {lat:40.5853, lng:-105.0844},zoom: 4,mapTypeId: google.maps.MapTypeId.ROADMAP});
+					
+					{% for item in loc1 %}
+					var {{item[0]}}1 = new google.maps.Marker({position: {{item[0]}},map: map,title: 'Location: {{item[0]}}, Capacity: {{item[3]}}, FixedCost: {{item[4]}}',icon: iconBase + 'factory_maps.png'});{% endfor %}
+					
+					{% for item in loc2 %}
+					var {{item[0]}}1 = new google.maps.Marker({position: {{item[0]}},map: map,title: 'Location: {{item[0]}}, Demand: {{item[3]}}',icon: iconBase + 'placemark_circle_maps.png'});{% endfor %}
+
+					var polylineoptns = [];
+					var i=1;
+					var j=0;
+					var col = ['#FF0000','#FF8000','#00FF00','#FF0080','#8000FF','#0000FF','black'];
+					
+					{% for data in dat %}
+						{% for dataa in data %}
+						polylineoptns[i]={
+							path: [{% for item in dataa %}{{item}},{% endfor %}],
+							strokeColor: col[j],
+							strokeOpacity: 0.8,
+							strokeWeight: 1,
+							map: map,
+							geodesic: true,
+							icons: [{icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},repeat:'500px',offset: '100%'}]
+						};
+						polyline = new google.maps.Polyline(polylineoptns[i]);
+						i=i+1;
+						{% endfor %}
+					j=j+1;
+					{% endfor %}
+					{% for lst in lstyy %}
+					var {{lst[0]}}2=new google.maps.InfoWindow({content:'{{lst[1]}}'});
+					{{lst[0]}}1.addListener('click',function(){
+					{{lst[0]}}2.open(map,{{lst[0]}}1);
+					});
+					{% endfor %}
+				}
+				window.onload = init;
+			}
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6iDB1k3km4yxP-oNkh_URhN7axPdBXug&callback=initMap"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>		
+		<script>
+			Highcharts.chart('container', {
+			title: {
+				text: 'Capacity Utilization'
+			},
+			xAxis: {
+				categories: [{% for item in x2 %}"{{item[0]}}",{% endfor %}],
+			},
+			series: [{
+				type: 'column',
+				name: 'Used Capacity',
+				data: [{% for item in x2 %}{{item[1]}},{% endfor %}]
+			}, {
+				type: 'column',
+				name: 'Total Capacity',
+				data: [{% for item in x1 %}{{item}},{% endfor %}]
+			}]
+		});
+		</script>
+	</body>
+</html>
+<!-- <script>
+function initMap(){
+var uluru={lat:-25.363,lng:131.044};
+var map=new google.maps.Map(document.getElementById('map'),{zoom:4,center:uluru});
+
+var infow=new google.maps.InfoWindow({content:"contentString"});
+var mark=new google.maps.Marker({position:uluru,map:map,title:'Uluru'});
+mark.addListener('click',function(){infow.open(map,mark);});
+}
+
+
+function initMap() {
+var map = new google.maps.Map(document.getElementById('map'),
+{zoom: 6,center: {lat:24.627376,lng:94.015161},mapTypeId: 'terrain'});
+
+// Create the polyline and add the symbol via the 'icons' property.
+var line = new google.maps.Polyline({
+path: [{lat:24.627376,lng:94.015161}, {lat:25.627376,lng:93.015161}],
+icons: [{icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},offset: '100%'}],
+map: map});
+}
+</script> -->
+
+

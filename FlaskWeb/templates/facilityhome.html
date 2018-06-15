@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Distribution Network Optimization</title>
+
+         <!-- Bootstrap CSS CDN -->
+		 <link rel="stylesheet" href="../static/bootstrap.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="../static/style.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		<!--        map-->
+        <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+    </head>
+	<style>
+	.btn2{
+	 background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+	border-radius:10px;
+	}
+	.btn3{
+	 background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 4px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+	border-radius:10px;
+	}
+	.custom_line{
+	display: inline-flex;
+	}
+	.custom_line li{
+	padding-left:10px;
+	}
+	.custom_line li p{
+	font-weight:600;
+	}
+	</style>
+    <body>
+
+
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+           <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><a href="home">Distribution Network Optimization</a></h3>
+                    <strong>DNO</strong>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="">
+                        <a href="dataimport">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            Data Import
+                        </a>
+                    </li>
+					<li class="">
+                        <a href="facility_location">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            Optimization
+                        </a>
+                    </li>
+                    
+              <!--      <li class="">
+                        <a href="#homeSubmenu" >
+                            <i class="glyphicon glyphicon-dashboard"></i>
+                            Shipment Load Optimization
+                        </a>
+                        
+                    </li>
+                     -->
+                    
+                </ul>
+
+                
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-default">
+				
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                
+							   <li ><a href="facilityhome">Facility Location</a></li>
+                                <li ><a href="Inventorymanagment">Shipment Load Optimization</a></li>
+                                <li ><a href="DISTRIBUTION_NETWORK_OPT">Admin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="container-background">
+				<h2>Facility Location </h2>
+                <div class="line"></div>
+                </div>
+			<div class="container-custom-body  row" style="margin-top:40px">
+				<div class="content-text">
+				   <div id="map" style="width: 100%; height: 10px;"></div>
+				</div>
+				
+			
+				</div>
+        </nav>
+		
+
+           </div>
+        </div>
+
+
+
+
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+         </script>
+		 
+		 
+		 <!-- Table -->
+		 
+
+		 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		 <script>
+		 $(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY": 200,
+        "scrollX": true
+    } );
+} );
+	 </script>
+	 <script>
+		 $(document).ready(function() {
+    $('#example1').DataTable( {
+        "scrollY": 200,
+        "scrollX": true
+    } );
+} );
+	 </script>
+    
+	
+    </body>
+</html>
