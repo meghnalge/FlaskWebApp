@@ -24,6 +24,7 @@ import numpy as np
 from pulp import *
 import pymysql
 import math
+import pyodbc
 
 # app = Flask(__name__)
 # app.secret_key = os.urandom(24)
@@ -55,7 +56,8 @@ def fleetallocation():
 
 @app.route("/reset")
 def reset():
-	conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+
+	conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',user='myadmin@scdemoserver',password='Megh@4420',db='Inventory_Management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
 	cur = conn.cursor()
 	cur.execute("DELETE FROM `input`")
 	cur.execute("DELETE FROM `output`")
@@ -68,18 +70,29 @@ def reset():
 @app.route("/dalink",methods = ['GET','POST'])
 def dalink():
 	sql = "INSERT INTO `input` (`Route`,`SLoc`,`Ship-to Abb`,`Primary Equipment`,`Batch`,`Prod Dt`,`SW`,`Met Held`,`Heat No`,`Delivery Qty`,`Width`,`Length`,`Test Cut`,`Customer Priority`) VALUES( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-	conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+	conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+		user='myadmin@scdemoserver',password='Megh@4420',
+		db='inventory_management',charset='utf8mb4',
+		cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 	cur = conn.cursor()
 	if request.method == 'POST':
 		typ = request.form.get('type')
 		frm = request.form.get('from')
 		to = request.form.get('to')
 		if typ and frm and to:
-			conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+			conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+				user='myadmin@scdemoserver',
+				password='Megh@4420',
+				db='Inventory_Management',
+				charset='utf8mb4',
+				cursorclass=pymysql.cursors.DictCursor, 
+				ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
+				
 			cur = conn.cursor()
-			curr = conn.cursor()
 			cur.execute("SELECT * FROM `inventory_data` WHERE `Primary Equipment` = '" + typ + "' AND `Prod Dt` BETWEEN '" + frm + "' AND '" + to + "'")
 			res = cur.fetchall()
+
+
 			if len(res)==0:
 				conn.close()
 				return render_template('fleetallocation.html',alert='No data available')
@@ -88,7 +101,7 @@ def dalink():
 			df1['Prod Dt'] =df1['Prod Dt'].astype(object)
 			for index, i in df1.iterrows():
 				data = (i['Route'],i['SLoc'],i['Ship-to Abb'],i['Primary Equipment'],i['Batch'],i['Prod Dt'],i['SW'],i['Met Held'],i['Heat No'],i['Delivery Qty'],i['Width'],i['Length'],i['Test Cut'],i['Customer Priority'])
-				curr.execute(sql,data)
+				cur.execute(sql,data)
 			conn.commit()
 			conn.close()
 			return render_template('fleetallocation.html',typ="   Equipment type: "+typ,frm="From: "+frm,to="   To:"+to,data = sfile.to_html(index=False))
@@ -99,12 +112,16 @@ def dalink():
 @app.route('/optimise', methods=['GET', 'POST'])
 def optimise():
 	open(localaddress+'\\static\\demodata.txt', 'w').close()
-	conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+	conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+		user='myadmin@scdemoserver',password='Megh@4420',
+		db='inventory_management',charset='utf8mb4',
+		cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 	cur = conn.cursor()
 	curr = conn.cursor()
 	cur.execute("DELETE FROM `output`")
 	conn.commit()
 	os.system('python optimising.py')
+
 	sa=1
 	cur.execute("SELECT * FROM `output`")
 	result = cur.fetchall()
@@ -142,7 +159,11 @@ def scenario_insert():
 			width_bounds = request.form.getlist("width_bounds[]")
 			length_bounds = request.form.getlist("length_bounds[]")
 			description = request.form.getlist("description[]")
-			conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+			
+			conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+				user='myadmin@scdemoserver',password='Megh@4420',
+				db='inventory_management',charset='utf8mb4',
+				cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 			cur = conn.cursor()
 			curr = conn.cursor()
 			lngth = len(scenario)
@@ -179,7 +200,10 @@ def scenario_insert():
 @app.route("/fetch", methods=['GET','POST'])
 def fetch():
 		if request.method == 'POST':
-			conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+			conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+				user='myadmin@scdemoserver',password='Megh@4420',
+				db='inventory_management',charset='utf8mb4',
+				cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 			cur = conn.cursor()
 			cur.execute("SELECT * FROM scenario")
 			result = cur.fetchall()
@@ -195,7 +219,10 @@ def fetch():
 @app.route("/delete", methods=['GET','POST'])
 def delete():
 		if request.method == 'POST':
-			conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+			conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+				user='myadmin@scdemoserver',password='Megh@4420',
+				db='inventory_management',charset='utf8mb4',
+				cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 			cur = conn.cursor()
 			cur.execute("DELETE FROM scenario")
 			conn.commit()
@@ -206,7 +233,11 @@ def delete():
 @app.route('/papadashboard', methods=['GET', 'POST'])
 def papadashboard():
 		sql1 = "SELECT `Scenario`, MAX(`Wagon-No`) AS 'Wagon Used', COUNT(`Batch`) AS 'Products Allocated', SUM(`Delivery Qty`) AS 'Total Product Allocated', SUM(`Delivery Qty`)/(MAX(`Wagon-No`)) AS 'Average Load Carried', SUM(`Width`)/(MAX(`Wagon-No`)) AS 'Average Width Used' FROM `output` WHERE `Wagon-No`>0 GROUP BY `Scenario`"
-		conn = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+		
+		conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+			user='myadmin@scdemoserver',password='Megh@4420',
+			db='inventory_management',charset='utf8mb4',
+			cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 		curs = conn.cursor()
 		curs.execute("SELECT `scenario` FROM `scenario`")
 		sdata = curs.fetchall()
@@ -243,7 +274,10 @@ def papadashboard():
 		sql11 = "SELECT `Scenario`, SUM(`Delivery Qty`)/(MAX(`Wagon-No`)) AS 'Average Load Carried', COUNT(`Batch`) AS 'Allocated', SUM(`Delivery Qty`) AS 'Load Allocated' FROM `output`WHERE `Wagon-No`>0 GROUP BY `Scenario`"
 		sql21 = "SELECT COUNT(`Batch`) AS 'Total Allocated' FROM `output` GROUP BY `Scenario`"
 		sql31 = "SELECT `load_upper_bounds` FROM `scenario`"
-		conn1 = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+		conn1 = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+			user='myadmin@scdemoserver',password='Megh@4420',
+			db='inventory_management',charset='utf8mb4',
+			cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 		cur11 = conn1.cursor()
 		cur21 = conn1.cursor()
 		cur31 = conn1.cursor()
@@ -269,7 +303,10 @@ def papadashboard():
 		conn1.close()
 
 		if request.method == 'POST':
-			conn2 = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+			conn2 = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+				user='myadmin@scdemoserver',password='Megh@4420',
+				db='inventory_management',charset='utf8mb4',
+				cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 			cur = conn2.cursor()
 			ata = request.form['name']
 			cur.execute("SELECT * FROM `output` WHERE `Scenario` = '"+ata+"' ")
@@ -516,12 +553,17 @@ def gmap():
 		Status=pd.DataFrame(Allstatus,columns=['Factory','Customer','Allocation']).astype(str)
 
 		#To get the Factory Data
-		con = pymysql.connect(host='localhost',user='root',password='',db='inventory_management',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
+		conn = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+			user='myadmin@scdemoserver',password='Megh@4420',
+			db='inventory_management',charset='utf8mb4',
+			cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 
 		#Making Connection to the Database
 		cur = con.cursor()
-		engine = create_engine("mysql+pymysql://{user}:{pw}@localhost/{db}".format(user="root",pw="",db="inventory_management"))
-		Status.to_sql(con=engine, name='facilityallocation',index=False, if_exists='replace')
+		con = pymysql.connect(host='scdemoserver.mysql.database.azure.com',
+			user='myadmin@scdemoserver',password='Megh@4420',
+			db='inventory_management',charset='utf8mb4',
+			cursorclass=pymysql.cursors.DictCursor, ssl = {'ssl': {'ca': '/var/www/html/BaltimoreCyberTrustRoot.crt.pem'}})
 
 		cur = con.cursor()
 		cur1 = con.cursor()
